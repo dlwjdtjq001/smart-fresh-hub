@@ -3,6 +3,7 @@
 > 지역 농민과 상인을 위한 식재료 물류 시스템
 
 ---
+>velog : https://velog.io/@dlwjdtjq1234/ChillStock식재료-전문-3pl-wms
 
 ## 목차
 
