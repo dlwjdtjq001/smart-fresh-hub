@@ -17,7 +17,7 @@
 8. 실행 중 발생할 수 있는 문제 및 해결 방법  
 9. 향후 개선 및 기능 추가  
 10. 향후 방향성
-
+11. 트러블 슈팅
 ---
 
 ## 1. 프로젝트 소개
@@ -136,15 +136,15 @@ ChillStock은 식자재 창고에서 공간 활용을 최적화하고, 효율적
 
 ## 6. 프로젝트 구조
 
-### 8-1. 아키텍처  
+### 6-1. 아키텍처  
 ![Image](https://github.com/user-attachments/assets/7b624559-e697-4be4-9d9e-d0ead675664f)
 
 
-### 8-2. ERD  
+### 6-2. ERD  
 관계형 데이터베이스 구조 설계 (3정규화 적용)
 ![Image](https://github.com/user-attachments/assets/54887793-7dca-401e-8a3e-791f82eb888f)
 
-### 8-3. 클래스 다이어그램  
+### 6-3. 클래스 다이어그램  
 도메인 객체 간 상호작용 시각화
 ![Image](https://github.com/user-attachments/assets/0084b2aa-b2cc-4186-958a-33289c08e132)
 
@@ -201,3 +201,19 @@ sql/data.sql
 - 신뢰 기반 협업 문화 유지 및 고도화  
 
 ---
+
+## 11. 트러블 슈팅
+
+- lombok 사용시 주의점
+lombok 사용시 필드명을 바꾸면 getter, setter 메소드 모두 메소드명이 바뀌어서 사용한 부분 모두 수정해야함
+->
+필드명 바꿀때 주의하고 직접 getter setter 메소드 구현하면 메소드명은 바뀌지 않음
+(캡슐화)
+
+[벨로그 트러블 슈팅 상세 정리 https://velog.io/@dlwjdtjq1234/lombok사용중-필드명-바꿨더니-큰일이](https://velog.io/@dlwjdtjq1234/lombok사용중-필드명-바꿨더니-큰일이)
+
+- db 트리거 프로시저 생성시 문제
+Mysql이 바이너리 로그(Binary logging) 를 사용하는 경우, 보안상의 이유로 deterministic 함수 또는 sql 이 데이터를 변경하지 않음을 명시하지 않으면 일반사용자는 함수나 트리거를 생성할 수 없음
+->
+SET GLOBAL log_bin_trust_function_creators = 1;
+실행 후 다시 0으로 세팅
